@@ -49,7 +49,7 @@ case class Bitlist(n: Int) {
     Bitlist(loop(this.map((x: Int) => x).reverse))
   }
 
-  def bitsum: Int = reduce((acc, x) => acc + x)
+  def bitsum: Int = reduce(_ + _)
 
   override def toString: String = {
     map(_.toString).mkString
