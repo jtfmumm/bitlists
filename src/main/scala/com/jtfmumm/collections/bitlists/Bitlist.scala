@@ -39,7 +39,7 @@ case class Bitlist(n: Int) {
     loop(this.tail, this.head)
   }
 
-  def parity: Int = reduce((x, y) => x + y) % 2
+  def parity: Int = reduce(_ + _) % 2
 
   def reverse: Bitlist = {
     def loop(l: Seq[Int], acc: Int = 0): Int = l match {
