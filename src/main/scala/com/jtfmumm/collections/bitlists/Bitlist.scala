@@ -42,15 +42,28 @@ case class Bitlist(n: Int) {
   def parity: Int = reduce((x, y) => x + y) % 2
 
   def reverse: Bitlist = {
-    def loop(l: Seq[Int], acc: Int = 0, place: Int = 0): Int = l match {
+    def loop(l: Seq[Int], acc: Int = 0): Int = l match {
       case a if a.isEmpty => acc
-      case _ => loop(l.tail, acc + (Math.pow(2, place) * l.head).toInt, place + 1)
+      case _ => loop(l.tail, (acc << 1) + l.head)
     }
-    Bitlist(loop(this.map((x: Int) => x)))
+    Bitlist(loop(this.map((x: Int) => x).reverse))
   }
 
   override def toString: String = {
     map(_.toString).mkString
+  }
+}
+
+object Bitlist {
+  def make(l: Int*): Bitlist = {
+    val intFromSeq = l.reduce((acc, x) => {
+      if (x != 0 && x != 1) throw new RuntimeException("You can only make a Bitlist from a series of 1s and 0s!")
+      (acc << 1) + x
+    })
+    new Bitlist(intFromSeq)
+  }
+  def makeFromSeq(l: Seq[Int]): Bitlist = {
+    make(l: _*)
   }
 }
 
