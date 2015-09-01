@@ -9,6 +9,7 @@ case class Bitlist(n: Int) {
   def isEmpty: Boolean = n == 0
   def nonEmpty: Boolean = !isEmpty
   val size: Int = log2(n).toInt + 1
+
   def head: Int = n & 1
   def tail: Bitlist = Bitlist(n >> 1)
 
