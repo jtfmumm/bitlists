@@ -49,12 +49,15 @@ case class Bitlist(n: Int) {
     Bitlist(loop(this.map((x: Int) => x).reverse))
   }
 
+  def bitsum: Int = reduce((acc, x) => acc + x)
+
   override def toString: String = {
     map(_.toString).mkString
   }
 }
 
 object Bitlist {
+  def apply(i: Int): Bitlist = new Bitlist(i)
   def make(l: Int*): Bitlist = {
     val intFromSeq = l.reduce((acc, x) => {
       if (x != 0 && x != 1) throw new RuntimeException("You can only make a Bitlist from a series of 1s and 0s!")
